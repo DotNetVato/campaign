@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beller for Sheriff - Leadership, Integrity, Service</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="beller_no_bg.png" alt="Beller for Sheriff" class="logo-img">
+                <span>Beller for Sheriff</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#platform" class="nav-link">Platform</a></li>
+                <li><a href="#get-involved" class="nav-link">Get Involved</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Leadership You Can Trust</h1>
+            <p>Committed to keeping our community safe with integrity and transparency</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="document.getElementById('get-involved').scrollIntoView({ behavior: 'smooth' })">Get Involved</button>
+                <button class="btn btn-secondary" onclick="document.getElementById('about').scrollIntoView({ behavior: 'smooth' })">Learn More</button>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="beller_no_bg.png" alt="Beller for Sheriff" class="hero-img">
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About The Candidate</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>With decades of experience in law enforcement and community service, Beller has dedicated his career to protecting and serving our community with distinction.</p>
+                    <p>Beller believes that effective sheriffing requires:</p>
+                    <ul class="values-list">
+                        <li>✓ Trust and transparency with the community</li>
+                        <li>✓ Professional law enforcement standards</li>
+                        <li>✓ Commitment to justice and fairness</li>
+                        <li>✓ Community-oriented public safety</li>
+                        <li>✓ Fiscal responsibility</li>
+                    </ul>
+                </div>
+                <div class="about-image">
+                    <img src="beller_no_bg.png" alt="Beller - Sheriff Candidate" class="about-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Section -->
+    <section id="platform" class="platform">
+        <div class="container">
+            <h2>Our Platform</h2>
+            <div class="platform-grid">
+                <div class="platform-card">
+                    <div class="card-icon">🛡️</div>
+                    <h3>Public Safety First</h3>
+                    <p>Enhanced community patrols, rapid response times, and modern crime prevention strategies to keep neighborhoods safe.</p>
+                </div>
+                <div class="platform-card">
+                    <div class="card-icon">🤝</div>
+                    <h3>Community Partnerships</h3>
+                    <p>Building stronger relationships between law enforcement and residents through transparent communication and engagement programs.</p>
+                </div>
+                <div class="platform-card">
+                    <div class="card-icon">📊</div>
+                    <h3>Data-Driven Policing</h3>
+                    <p>Using evidence-based strategies and technology to effectively allocate resources and address crime hotspots.</p>
+                </div>
+                <div class="platform-card">
+                    <div class="card-icon">💪</div>
+                    <h3>Officer Support</h3>
+                    <p>Ensuring our law enforcement professionals have the training, equipment, and support they need to do their jobs safely and effectively.</p>
+                </div>
+                <div class="platform-card">
+                    <div class="card-icon">⚖️</div>
+                    <h3>Integrity & Accountability</h3>
+                    <p>Maintaining the highest ethical standards and ensuring transparent, fair practices throughout the sheriff's office.</p>
+                </div>
+                <div class="platform-card">
+                    <div class="card-icon">💰</div>
+                    <h3>Fiscal Responsibility</h3>
+                    <p>Managing resources efficiently while maintaining public safety standards and fiscal transparency.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Get Involved Section -->
+    <section id="get-involved" class="get-involved">
+        <div class="container">
+            <h2>Get Involved</h2>
+            <div class="involvement-grid">
+                <div class="involvement-card">
+                    <h3>Volunteer</h3>
+                    <p>Join our campaign team and help spread the message throughout the community.</p>
+                    <button class="btn btn-small" onclick="openModal('volunteer')">Learn More</button>
+                </div>
+                <div class="involvement-card">
+                    <h3>Donate</h3>
+                    <p>Support the campaign with a contribution to build a stronger, safer community.</p>
+                    <button class="btn btn-small" onclick="openModal('donate')">Donate Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Contact Information</h2>
+            <div class="contact-info-section">
+                <div class="info-item">
+                    <span class="label">Email:</span>
+                    <a href="mailto:BellerforSheriff@gmail.com">BellerforSheriff@gmail.com</a>
+                </div>
+                <div class="info-item">
+                    <span class="label">Phone:</span>
+                    <a href="tel:+12622378137">(262) 237-8137</a>
+                </div>
+                <div class="info-item">
+                    <span class="label">Follow Us:</span>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/profile.php?id=61586307804834" target="_blank" class="social-icon">Facebook</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Beller for Sheriff Campaign. All rights reserved.</p>
+            <p>Paid for by Beller for Sheriff Campaign</p>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
