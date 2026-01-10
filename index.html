@@ -142,7 +142,7 @@
                 <div class="info-item">
                     <span class="label">Follow Us:</span>
                     <div class="social-links">
-                        <a href="https://www.facebook.com/profile.php?id=61586307804834" target="_blank" class="social-icon">Facebook</a>
+                        <a href="https://www.facebook.com/profile.php?id=61586307804834" class="social-icon">Facebook</a>
                     </div>
                 </div>
             </div>
@@ -166,5 +166,23 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+        (function(){
+            function setFacebookTarget() {
+                var isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+                document.querySelectorAll('a[href*="facebook.com"]').forEach(function(a){
+                    if (isDesktop) {
+                        a.setAttribute('target', '_blank');
+                        a.setAttribute('rel', 'noopener noreferrer');
+                    } else {
+                        a.removeAttribute('target');
+                        a.removeAttribute('rel');
+                    }
+                });
+            }
+            document.addEventListener('DOMContentLoaded', setFacebookTarget);
+            window.addEventListener('resize', setFacebookTarget);
+        })();
+    </script>
 </body>
 </html>
