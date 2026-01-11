@@ -1,26 +1,13 @@
-// Hamburger menu functionality
-const hamburger = document.querySelector('.hamburger');
-const navMenu = document.querySelector('.nav-menu');
 
-if (hamburger) {
-    hamburger.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-    });
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
-// Close mobile menu when a link is clicked
-const navLinks = document.querySelectorAll('.nav-link');
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-    });
-});
 
 // Modal functionality
 function openModal(type) {
     const modal = document.getElementById('modal');
     const modalBody = document.getElementById('modal-body');
-    
+
     const content = {
         volunteer: `
             <h2>Volunteer</h2>
@@ -38,7 +25,7 @@ function openModal(type) {
             <p style="font-size: 0.9rem; margin-top: 20px; color: #666;">Paid for by Beller for Sheriff Campaign. Contributions are not tax-deductible.</p>
         `
     };
-    
+
     modalBody.innerHTML = content[type] || '<p>Content not found</p>';
     modal.style.display = 'block';
 }
@@ -48,22 +35,14 @@ function closeModal() {
     modal.style.display = 'none';
 }
 
-function selectAmount(amount) {
-    alert(`Selected: $${amount}`);
-}
-
 // Close modal when clicking outside of it
-window.onclick = function(event) {
+window.onclick = function (event) {
     const modal = document.getElementById('modal');
     if (event.target == modal) {
         modal.style.display = 'none';
     }
 }
 
-// Form submission
-function handleFormSubmit(event) {
-    event.preventDefault();
-}
 
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -100,4 +79,21 @@ document.querySelectorAll('.platform-card, .involvement-card').forEach(card => {
     card.style.transform = 'translateY(20px)';
     card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(card);
+});
+
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('nav-menu');
+
+hamburger.addEventListener('click', function () {
+    hamburger.classList.toggle('active');
+    navMenu.classList.toggle('active');
+});
+
+// Close menu when a link is clicked
+const navLinks = navMenu.querySelectorAll('a');
+navLinks.forEach(link => {
+    link.addEventListener('click', function () {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+    });
 });
