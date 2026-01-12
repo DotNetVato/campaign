@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +8,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo" onclick="scrollToTop()">
-                <img src="beller_no_bg.png" alt="Beller for Sheriff" class="logo-img">
+                <img src="img/beller_nobg.png" alt="Beller for Sheriff" class="logo-img">
                 <span>Beller for Sheriff</span>
             </div>
             <ul id="nav-menu" class="nav-menu">
@@ -36,33 +38,56 @@
             <h1>Leadership You Can Trust</h1>
             <p>Committed to keeping our community safe with integrity and transparency</p>
             <div class="hero-buttons">
-                <button class="btn btn-primary" onclick="document.getElementById('get-involved').scrollIntoView({ behavior: 'smooth' })">Get Involved</button>
-                <button class="btn btn-secondary" onclick="document.getElementById('about').scrollIntoView({ behavior: 'smooth' })">Learn More</button>
+                <button class="btn btn-primary"
+                    onclick="document.getElementById('get-involved').scrollIntoView({ behavior: 'smooth' })">Get
+                    Involved</button>
+                <button class="btn btn-secondary"
+                    onclick="document.getElementById('about').scrollIntoView({ behavior: 'smooth' })">Learn
+                    More</button>
             </div>
         </div>
         <div class="hero-image">
-            <img src="beller_no_bg.png" alt="Beller for Sheriff" class="hero-img">
+            <img src="img/beller_nobg.png" alt="Beller for Sheriff" class="hero-img">
         </div>
     </section>
 
     <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
-            <h2>About The Candidate</h2>
+            <h2>About James Beller</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>With decades of experience in law enforcement and community service, Beller has dedicated his career to protecting and serving our community with distinction.</p>
-                    <p>Beller believes that effective sheriffing requires:</p>
-                    <ul class="values-list">
-                        <li>✓ Trust and transparency with the community</li>
-                        <li>✓ Professional law enforcement standards</li>
-                        <li>✓ Commitment to justice and fairness</li>
-                        <li>✓ Community-oriented public safety</li>
-                        <li>✓ Fiscal responsibility</li>
-                    </ul>
+                    <p>
+                        James Beller has lived in Kenosha County his entire life. Growing up in Paddock Lake, he
+                        attended
+                        local schools before enlisting in the United States Army. After his Army service, he returned to
+                        Paddock while he attended college. He built his career here, raised his family here, and has
+                        spent nearly three decades serving and protecting the people of Kenosha County. His commitment
+                        to public safety is not a slogan. It is measured in years of leadership, responsibility, and
+                        results.
+                    </p>
+                    <p>
+                        A United States Army veteran, Beller began his public safety career serving Kenosha County as a
+                        dispatcher with the Kenosha Joint Services Communications Center before joining the Kenosha
+                        County Sheriff's Office, where he worked as an undercover narcotics agent. In January 2001, he
+                        joined the City of Kenosha Police Department, beginning what would become a nearly three-decade
+                        career in law enforcement leadership.
+                    </p>
+                    <p>
+                        Throughout his career, Beller has focused on strengthening public safety institutions from the
+                        inside out. He has modernized operations, improved accountability, and built specialized units
+                        to ensure serious crimes are investigated professionally and thoroughly. His leadership
+                        philosophy is simple: strong organizations, clear standards, and disciplined execution are what
+                        keep communities safe.</p>
+                    <p>
+                        As Sheriff, Beller will bring the same professional, steady leadership to the Kenosha County
+                        Sheriff's Office, ensuring the agency remains trusted, effective, and prepared for the future.
+                    </p>
+
                 </div>
                 <div class="about-image">
-                    <img src="beller_no_bg.png" alt="Beller - Sheriff Candidate" class="about-img">
+                    <img src="img/img_001.png" alt="Beller - Sheriff Candidate" class="about-img landscape">
+                    <img src="img/img_003.png" alt="Beller - Sheriff Candidate" class="about-img portrait">
                 </div>
             </div>
         </div>
@@ -71,37 +96,31 @@
     <!-- Platform Section -->
     <section id="platform" class="platform">
         <div class="container">
-            <h2>Our Platform</h2>
+            <h2>Platform</h2>
             <div class="platform-grid">
                 <div class="platform-card">
-                    <div class="card-icon">🛡️</div>
-                    <h3>Public Safety First</h3>
-                    <p>Enhanced community patrols, rapid response times, and modern crime prevention strategies to keep neighborhoods safe.</p>
+                    <div class="card-icon">👮‍♂️</div>
+                    <h3>Executive Leadership and Organizational Management</h3>
+                    <p>James Beller currently serves as a Police Captain and Detective Bureau Commander for the City of Kenosha, where he leads one of the department’s most complex and mission-critical divisions. He oversees approximately 60 sworn personnel across nine specialized units responsible for homicides, crimes against children, sensitive crimes, and major investigations.</p>
+                    <button class="btn-learn-more" onclick="openModal('executive-leadership-and-organizational-management')">Learn More</button>
                 </div>
                 <div class="platform-card">
-                    <div class="card-icon">🤝</div>
-                    <h3>Community Partnerships</h3>
-                    <p>Building stronger relationships between law enforcement and residents through transparent communication and engagement programs.</p>
+                    <div class="card-icon">🔗</div>
+                    <h3>Regional and Inter-Agency Leadership</h3>
+                    <p>Wisconsin law requires that officer-involved shootings and in-custody deaths be investigated by an independent outside agency. To meet that requirement, the Kenosha Racine Area Investigative Team (KRAIT) was formed, bringing together investigators from multiple law enforcement agencies across two counties.</p>
+                    <button class="btn-learn-more" onclick="openModal('regional-and-inter-agency-leadership')">Learn More</button>
                 </div>
                 <div class="platform-card">
-                    <div class="card-icon">📊</div>
-                    <h3>Data-Driven Policing</h3>
-                    <p>Using evidence-based strategies and technology to effectively allocate resources and address crime hotspots.</p>
+                    <div class="card-icon">🎯</div>
+                    <h3>Operational Command Experience</h3>
+                    <p>In addition to his executive responsibilities, Beller has commanded critical public safety operations. He served as second-shift Patrol Commander during the 2020 civil unrest, directing personnel, coordinating resources, and working alongside local, state, and federal partners during the most challenging public safety crisis in Kenosha’s history.</p>
+                    <button class="btn-learn-more" onclick="openModal('operational-command-experience')">Learn More</button>
                 </div>
                 <div class="platform-card">
-                    <div class="card-icon">💪</div>
-                    <h3>Officer Support</h3>
-                    <p>Ensuring our law enforcement professionals have the training, equipment, and support they need to do their jobs safely and effectively.</p>
-                </div>
-                <div class="platform-card">
-                    <div class="card-icon">⚖️</div>
-                    <h3>Integrity & Accountability</h3>
-                    <p>Maintaining the highest ethical standards and ensuring transparent, fair practices throughout the sheriff's office.</p>
-                </div>
-                <div class="platform-card">
-                    <div class="card-icon">💰</div>
-                    <h3>Fiscal Responsibility</h3>
-                    <p>Managing resources efficiently while maintaining public safety standards and fiscal transparency.</p>
+                    <div class="card-icon">🏛️</div>
+                    <h3>Labor, Community, and Board Leadership</h3>
+                    <p>Beller brings a rare perspective, having served both as a command-level executive and as a union leader. He previously served as Second Vice President of the Kenosha Professional Police Association and later as Vice President of the Kenosha Police Supervisory Officers Association, where he participated in labor relations, discipline processes, and contract negotiations.</p>
+                    <button class="btn-learn-more" onclick="openModal('labor-community-and-board-leadership')">Learn More</button>
                 </div>
             </div>
         </div>
@@ -142,7 +161,8 @@
                 <div class="info-item">
                     <span class="label">Follow Us:</span>
                     <div class="social-links">
-                        <a href="https://www.facebook.com/profile.php?id=61586307804834" class="social-icon">Facebook</a>
+                        <a href="https://www.facebook.com/profile.php?id=61586307804834"
+                            class="social-icon">Facebook</a>
                     </div>
                 </div>
             </div>
@@ -161,16 +181,16 @@
     <div id="modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
-            <div id="modal-body"></div>
+            <div id="modal-body" class="modal-body"></div>
         </div>
     </div>
 
     <script src="script.js"></script>
     <script>
-        (function(){
+        (function () {
             function setFacebookTarget() {
                 var isDesktop = window.matchMedia('(min-width: 1024px)').matches;
-                document.querySelectorAll('a[href*="facebook.com"]').forEach(function(a){
+                document.querySelectorAll('a[href*="facebook.com"]').forEach(function (a) {
                     if (isDesktop) {
                         a.setAttribute('target', '_blank');
                         a.setAttribute('rel', 'noopener noreferrer');
@@ -185,4 +205,5 @@
         })();
     </script>
 </body>
+
 </html>
