@@ -43,7 +43,13 @@ function openModal(type) {
             <h2 style='text-align: center;'>🏛️</h2>
             <p>Through those roles, he also led community initiatives, including expanding Shop with a Cop and initiated Back-to-School with a Cop, strengthening trust between law enforcement and local families.</p>
             <p>Beyond policing, Beller serves as Secretary of the Southern Lakes Credit Union Board of Directors and on the Gateway Technical College Criminal Justice Advisory Committee, contributing to financial oversight, governance, and the training of future public safety professionals.</p>
-        `
+        `,
+        'request-sign': `
+            <h2>Request a sign</h2>
+            <p>Show your support for James Beller for Sheriff by requesting a campaign sign for your yard or business!</p>
+            <p>Please provide your name, address, and contact information so we can deliver a sign to you.</p>
+            <p>Email us at <strong>BellerforSheriff@gmail.com</strong></p>
+        `,
     };
 
     modalBody.innerHTML = content[type] || '<p>Content not found</p>';
