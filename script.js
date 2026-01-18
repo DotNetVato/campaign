@@ -13,7 +13,7 @@ function openModal(type) {
             <h2>Volunteer</h2>
             <p>Thank you for your interest in volunteering for the Beller for Sheriff campaign!</p>
             <p>Volunteers are the backbone of our campaign. Whether you can knock on doors, make phone calls, attend events, or help with social media, every contribution matters.</p>
-            <p>Email us at <strong>BellerforSheriff@gmail.com</strong></p>
+            <p>Email us at <a href="mailto:BellerforSheriff@gmail.com"><strong>BellerforSheriff@gmail.com</strong></a></p>
         `,
         donate: `
             <h2>Support the Campaign</h2>
@@ -48,8 +48,14 @@ function openModal(type) {
             <h2>Request a sign</h2>
             <p>Show your support for James Beller for Sheriff by requesting a campaign sign for your yard or business!</p>
             <p>Please provide your name, address, and contact information so we can deliver a sign to you.</p>
-            <p>Email us at <strong>BellerforSheriff@gmail.com</strong></p>
+            <p>Email us at <a href="mailto:BellerforSheriff@gmail.com"><strong>BellerforSheriff@gmail.com</strong></a></p>
         `,
+        'community-engagement-and-public-trust': `
+            <h2 style='text-align: center;'>🛡️</h2>
+            <p>That experience shaped his belief that public safety is built not only through enforcement, but through visibility, communication, and accountability.</p>
+            <p>As Sheriff, Beller will apply those same principles to the Kenosha County Sheriff's Office by ensuring professional conduct in the jail, respectful treatment of those who come through the court system, and strong partnerships with community organizations, municipalities, and service providers.
+            <p>Public trust in the Sheriff's Office is essential, and it is earned by how people are treated every day.</p>
+        `
     };
 
     modalBody.innerHTML = content[type] || '<p>Content not found</p>';

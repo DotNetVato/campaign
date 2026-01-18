@@ -245,7 +245,7 @@ body {
 .about-content {
     display: flex;
     gap: 60px;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .about-subsection {
@@ -287,6 +287,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    justify-content: space-between;
 }
 
 .about-img {
@@ -359,6 +360,16 @@ img.landscape {
 .modal-body p {
     text-align: left;
     padding: 0 10px 10px 0px;
+}
+
+.modal-body a {
+    color: #666;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.modal-body a:hover {
+    color: var(--primary-color);
 }
 
 .platform-card:hover {
