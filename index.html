@@ -7,7 +7,7 @@
     <title>Beller for Sheriff - Leadership, Integrity, Service</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=1.0.1">
+    <link rel="stylesheet" href="styles.css?v=1.0.3">
 </head>
 
 <body>
@@ -22,7 +22,7 @@
                 <button class="nav-donate-btn" onclick="openModal('donate')">Donate</button>
                 <ul id="nav-menu" class="nav-menu">
                     <li><a href="#top" onclick="scrollToTop()" class="nav-link">Home</a></li>
-                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#meet" class="nav-link">Meet</a></li>
                     <li><a href="#platform" class="nav-link">Platform</a></li>
                     <li><a href="#get-involved" class="nav-link">Get Involved</a></li>
                     <li><a href="#education" class="nav-link">Education</a></li>
@@ -42,13 +42,13 @@
         <section id="home" class="hero">
             <div class="hero-content">
                 <h1>Leadership You Can Trust</h1>
-                <p>Committed to keeping our community safe with integrity and transparency</p>
+                <p>Your safety, your trust, and your peace of mind depend on a Sheriff who leads with integrity, consistency, and accountability.</p>
                 <div class="hero-buttons">
                     <button class="btn btn-primary"
                         onclick="document.getElementById('get-involved').scrollIntoView({ behavior: 'smooth' })">Get
                         Involved</button>
                     <button class="btn btn-secondary"
-                        onclick="document.getElementById('about').scrollIntoView({ behavior: 'smooth' })">Learn
+                        onclick="document.getElementById('mypromise').scrollIntoView({ behavior: 'smooth' })">Learn
                         More</button>
                 </div>
             </div>
@@ -56,54 +56,77 @@
                 <img src="img/beller_nobg.png" alt="Beller for Sheriff" class="hero-img">
             </div>
         </section>
+        
+        <!-- My Promise Section -->
+        <section id="mypromise" class="promise">
+            <div class="container">
+                <h2>My Promise to Kenosha County</h2>
+                <div class="promise-content">
+                    <div class="promise-text">
+                        <p>
+                            As Sheriff, I will lead with integrity, consistency, and accountability. I will enforce the law fairly, support the professionals who serve in the Sheriff's Office, and place public safety above politics in every decision. I will provide steady leadership and clear standards so the Sheriff's Office operates professionally and earns the trust of the community.
+                        </p>
+                    </div>
+            </div>
+        </section>
 
         <!-- About Section -->
-        <section id="about" class="about">
+        <section id="meet" class="about">
             <div class="container">
-                <h2>About James Beller</h2>
+                <h2>Meet James Beller</h2>
                 <div class="about-content">
                     <div class="about-text">
                         <p>
-                            James Beller has lived in Kenosha County his entire life. Growing up in Paddock Lake, he
-                            attended
-                            local schools before enlisting in the United States Army. After his Army service, he
-                            returned to
-                            Paddock while he attended college. He built his career here, raised his family here, and has
-                            spent nearly three decades serving and protecting the people of Kenosha County. His
-                            commitment
-                            to public safety is not a slogan. It is measured in years of leadership, responsibility, and
-                            results.
+                            James Beller is a lifelong Kenosha County resident with nearly three decades of service protecting this community. His commitment to the Kenosha County Sheriff's Office began early as a member of the Sheriff's Office Youth Explorer program and continued through direct service as an undercover narcotics agent. Public safety is not new to him, and it is not political. It has been his life's work.
                         </p>
                         <p>
-                            A United States Army veteran, Beller began his public safety career serving Kenosha County
-                            as a
-                            dispatcher with the Kenosha Joint Services Communications Center before joining the Kenosha
-                            County Sheriff's Office, where he worked as an undercover narcotics agent. In January 2001,
-                            he
-                            joined the City of Kenosha Police Department, beginning what would become a nearly
-                            three-decade
-                            career in law enforcement leadership.
+                            A United States Army veteran, Beller served Kenosha County as a dispatcher with the Kenosha Joint Services Communications Center before joining the City of Kenosha Police Department in 2001. There, he built a career in investigations and command leadership, overseeing complex cases, specialized units, and major public safety initiatives that demanded accountability, discipline, and results.
                         </p>
                         <p>
-                            Throughout his career, Beller has focused on strengthening public safety institutions from
-                            the
-                            inside out. He has modernized operations, improved accountability, and built specialized
-                            units
-                            to ensure serious crimes are investigated professionally and thoroughly. His leadership
-                            philosophy is simple: strong organizations, clear standards, and disciplined execution are
-                            what
-                            keep communities safe.</p>
+                            Throughout his career, Beller has focused on strengthening public safety from the inside out. He has modernized operations, reinforced professional standards, and built specialized teams to ensure serious crimes are investigated thoroughly and responsibly. His leadership philosophy is straightforward: clear expectations, personal accountability, and disciplined execution are what keep communities safe.
+                        </p>
                         <p>
-                            As Sheriff, Beller will bring the same professional, steady leadership to the Kenosha County
-                            Sheriff's Office, ensuring the agency remains trusted, effective, and prepared for the
-                            future.
+                            As Sheriff, James Beller will bring steady, experienced leadership to the Kenosha County Sheriff's Office. He will support deputies and staff, enforce the law fairly, and ensure the agency remains trusted, effective, and prepared to meet the challenges ahead.
                         </p>
 
                     </div>
                     <div class="about-image">
-                        <img src="img/img_001.png" alt="Beller - Sheriff Candidate" class="about-img landscape">
-                        <img src="img/img_003.png" alt="Beller - Sheriff Candidate" class="about-img portrait">
-                        <img src="img/img_004.png" alt="Beller - Sheriff Candidate" class="about-img portrait">
+                        <div class="image-rotator">
+                            <div class="rotator-image active">
+                                <img src="img/img_000.png" alt="Beller - Sheriff Candidate" class="about-img portrait" data-scale="contain">
+                            </div>
+                            <div class="rotator-image">
+                                <img src="img/img_001.png" alt="Beller - Sheriff Candidate" class="about-img landscape" data-scale="cover">
+                            </div>
+                            <div class="rotator-image">
+                                <img src="img/img_002.png" alt="Beller - Sheriff Candidate" class="about-img portrait" data-scale="cover">
+                            </div>
+                            <div class="rotator-image">
+                                <img src="img/img_003.png" alt="Beller - Sheriff Candidate" class="about-img portrait" data-scale="contain">
+                            </div>
+                            <div class="rotator-image">
+                                <img src="img/img_004.png" alt="Beller - Sheriff Candidate" class="about-img portrait" data-scale="contain">
+                            </div>
+                            <div class="rotator-image">
+                                <img src="img/img_005.png" alt="Beller - Sheriff Candidate" class="about-img landscape" data-scale="cover">
+                            </div>
+                            <div class="rotator-image">
+                                <img src="img/img_006.png" alt="Beller - Sheriff Candidate" class="about-img landscape" data-scale="cover">
+                            </div>
+                            <div class="rotator-controls">
+                                <button class="rotator-prev" aria-label="Previous image">&lt;</button>
+                                <div class="rotator-dots">
+                                    <span class="rotator-dot active" data-index="0"></span>
+                                    <span class="rotator-dot" data-index="1"></span>
+                                    <span class="rotator-dot" data-index="2"></span>
+                                    <span class="rotator-dot" data-index="3"></span>
+                                    <span class="rotator-dot" data-index="4"></span>
+                                    <span class="rotator-dot" data-index="5"></span>
+                                    <span class="rotator-dot" data-index="6"></span>
+                                </div>
+                                <button class="rotator-next" aria-label="Next image">&gt;</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -114,24 +137,17 @@
             <div class="container">
                 <h2>Why He Is Running</h2>
                 <div class="why-running-content">
-                    <p>
-                        James Beller is running for Kenosha County Sheriff because the office demands experienced,
-                        disciplined leadership. The Sheriff's Office is responsible for the jail, court security, patrol
-                        operations, investigations, and public safety across the entire county. That responsibility
-                        requires someone who understands complex operations, legal standards, labor relations, budgets,
-                        and inter-agency coordination.
-                    </p>
-                    <p>
-                        Beller has spent nearly three decades rising from patrol officer to Police Captain, leading
-                        investigative divisions, training programs, and regional critical-incident teams. He has managed
-                        people, budgets, policy, and high-risk operations. He has worked hand-in-hand with local, state,
-                        and federal partners to keep the community safe.
-                    </p>
-                    <p>
-                        Kenosha County deserves a Sheriff who brings steady leadership, clear standards, and
-                        professional accountability to every part of the organization. James Beller is ready to provide
-                        it.
-                    </p>
+                    <div class="why-running-text">
+                        <p>
+                            James Beller is running for Kenosha County Sheriff because the office demands experienced, disciplined leadership and a clear vision for the future. The Sheriff's Office is responsible for jail operations, court security, patrol, investigations, and countywide public safety. That responsibility requires thoughtful leadership prepared to guide the organization forward.
+                        </p>
+                        <p>
+                            Beller brings both deep local experience and a broad leadership perspective. He worked undercover for the Kenosha County Sheriff's Office from October 1998 through January 2001 and served on the Sheriff's Tactical Response Team from 2007 through 2010. Over nearly three decades in law enforcement, he has risen from patrol officer to Police Captain, leading investigative divisions, training programs, and regional critical-incident teams. He has managed people, budgets, policy, and high-risk operations, and worked closely with local, state, and federal partners to protect the community.
+                        </p>
+                        <p>
+                            Kenosha County deserves a Sheriff who understands the organization, respects its people, and is prepared to lead it into the future. James Beller is running to provide steady leadership, clear standards, and professional accountability across every function of the Sheriff's Office.
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -140,12 +156,17 @@
         <section id="platform" class="platform">
             <div class="container">
                 <h2>Platform</h2>
+                <div class="platform-text">
+                    <p>
+                        As Sheriff, I will lead with integrity, enforce the law fairly, support the professionals who serve in the Sheriff's Office, and always put public safety ahead of politics.
+                    </p>
+                </div>
                 <div class="platform-grid">
                     <div class="platform-card">
                         <div class="card-icon">👮‍♂️</div>
                         <h3>Executive Leadership and Organizational Management</h3>
                         <p>James Beller currently serves as a Police Captain and Detective Bureau Commander for the City
-                            of Kenosha, where he leads one of the department’s most complex and mission-critical
+                            of Kenosha, where he leads one of the department's most complex and mission-critical
                             divisions. He oversees approximately 60 sworn personnel across nine specialized units
                             responsible for homicides, crimes against children, sensitive crimes, and major
                             investigations.</p>
@@ -194,6 +215,13 @@
                         <button class="btn-read-more" onclick="openModal('community-engagement-and-public-trust')">...
                             read more<i class="fas fa-arrow-right"></i></i></button>
                     </div>
+                     <div class="platform-card">
+                        <div class="card-icon">📚</div>
+                        <h3>Employee Growth & Professional Development</h3>
+                        <p>Public safety depends on a well-trained Sheriff's Office. Deputies, jail staff, supervisors, and command staff must be prepared to make sound decisions, act professionally, and respond effectively in critical situations that affect the safety of our community.</p>
+                        <button class="btn-read-more" onclick="openModal('employee-growth-and-professional-development')">...
+                            read more<i class="fas fa-arrow-right"></i></i></button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -233,6 +261,7 @@
                         <li>Master of Science in Criminal Justice, University of Wisconsin–Platteville</li>
                         <li>FBI National Academy, Session 291</li>
                         <li>Certified Public Manager, University of Wisconsin - Madison</li>
+                        <li>Leadership Kenosha, Class 25</li>
                         <li>FBI-LEEDA Leadership Trilogy (ELI, CLI, SLI)</li>
                         <li>Bachelor of Science in Criminal Justice Management, Concordia University</li>
                         <li>Associate Degree in Criminal Justice, Gateway Technical College</li>
@@ -283,7 +312,7 @@
                 <div id="modal-body" class="modal-body"></div>
             </div>
         </div>
-    <script src="script.js?v=1.0.1"></script>
+    <script src="script.js?v=1.0.3"></script>
     <script>
         (function () {
             function setFacebookTarget() {

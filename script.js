@@ -27,13 +27,13 @@ function openModal(type) {
         'executive-leadership-and-organizational-management': `
             <h2 style='text-align: center;'>👮‍♂️</h2>
             <p>His command responsibilities include staffing, budgets, policy compliance, case oversight, and inter-agency coordination. These units handle the most serious, high-risk, and high-liability cases in the region, requiring disciplined leadership, strict adherence to law and policy, and constant coordination with prosecutors, federal partners, and neighboring agencies.</p>
-            <p>Previously, Beller served as Administration Captain, where he directed the department’s Planning, Training, and Research functions. In that role, he was the Department’s Training Director, responsible for ensuring officers and supervisors met modern legal, ethical, and professional standards.</p>
-            <p>He also led the department's grant management and public safety technology initiatives, securing and implementing state and federal funding to modernize equipment, improve investigative capability, and strengthen accountability systems. These investments expanded the department’s ability to prevent, detect, and solve crime while maintaining strong oversight and fiscal responsibility.</p>
+            <p>Previously, Beller served as Administration Captain, where he directed the department's Planning, Training, and Research functions. In that role, he was the Department's Training Director, responsible for ensuring officers and supervisors met modern legal, ethical, and professional standards.</p>
+            <p>He also led the department's grant management and public safety technology initiatives, securing and implementing state and federal funding to modernize equipment, improve investigative capability, and strengthen accountability systems. These investments expanded the department's ability to prevent, detect, and solve crime while maintaining strong oversight and fiscal responsibility.</p>
         `,
         'regional-and-inter-agency-leadership': `
             <h2 style='text-align: center;'>🔗</h2>
             <p>James Beller was selected by the KRAIT Executive Committee, made up of Police Chiefs and Sheriffs from Kenosha and Racine Counties, to serve as Commander. In this role, he leads multi-agency investigative teams, coordinates complex critical-incident cases, and ensures every investigation is conducted objectively, professionally, and in full compliance with Wisconsin law.</p>
-            <p>Being selected by senior law enforcement executives across two counties reflects the trust placed in Beller’s judgment, leadership, and ability to manage high-stakes investigations with transparency and professionalism.</p>
+            <p>Being selected by senior law enforcement executives across two counties reflects the trust placed in Beller's judgment, leadership, and ability to manage high-stakes investigations with transparency and professionalism.</p>
         `,
         'operational-command-experience': `
             <h2 style='text-align: center;'>🎯</h2>
@@ -55,6 +55,11 @@ function openModal(type) {
             <p>That experience shaped his belief that public safety is built not only through enforcement, but through visibility, communication, and accountability.</p>
             <p>As Sheriff, Beller will apply those same principles to the Kenosha County Sheriff's Office by ensuring professional conduct in the jail, respectful treatment of those who come through the court system, and strong partnerships with community organizations, municipalities, and service providers.
             <p>Public trust in the Sheriff's Office is essential, and it is earned by how people are treated every day.</p>
+        `,
+        'employee-growth-and-professional-development': `
+            <h2 style='text-align: center;'>📚</h2>
+            <p>As Sheriff, James Beller will ensure all personnel receive high-quality, relevant training focused on judgment, accountability, and officer safety. He will establish consistent, department-wide training standards and ensure employees across all assignments have access to professional development opportunities. This includes creating clear pathways for jail personnel to pursue leadership roles through training, mentorship, and supervisory development.</p>
+            <p>James Beller's approach to employee development is grounded in experience. As a former Training Captain and graduate of the FBI National Academy, he has focused on organizational growth and strengthening training programs that improve performance across the entire department. As Sheriff, he will continue investing in people to build a professional, prepared, and trusted Sheriff's Office that serves the community with integrity.</p>
         `
     };
 
@@ -128,4 +133,103 @@ navLinks.forEach(link => {
         hamburger.classList.remove('active');
         navMenu.classList.remove('active');
     });
+});
+
+// Image Rotator Functionality
+class ImageRotator {
+    constructor() {
+        this.currentIndex = 0;
+        this.images = document.querySelectorAll('.rotator-image');
+        this.dots = document.querySelectorAll('.rotator-dot');
+        this.prevBtn = document.querySelector('.rotator-prev');
+        this.nextBtn = document.querySelector('.rotator-next');
+        this.autoRotateInterval = null;
+        this.autoRotateDelay = 3000; // 5 seconds
+        
+        if (this.images.length === 0) return;
+        
+        this.init();
+    }
+    
+    init() {
+        // Apply initial scaling based on data-scale attributes
+        this.applyScaling();
+        
+        // Add event listeners
+        this.prevBtn.addEventListener('click', () => this.prev());
+        this.nextBtn.addEventListener('click', () => this.next());
+        
+        this.dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => this.goToSlide(index));
+        });
+        
+        // Start auto-rotation
+        this.startAutoRotate();
+        
+        // Pause auto-rotation when user interacts
+        const rotator = document.querySelector('.image-rotator');
+        rotator.addEventListener('mouseenter', () => this.stopAutoRotate());
+        rotator.addEventListener('mouseleave', () => this.startAutoRotate());
+    }
+    
+    applyScaling() {
+        // Apply data-scale attribute to each image for flexible fitting
+        this.images.forEach(imageContainer => {
+            const img = imageContainer.querySelector('img');
+            if (img && img.hasAttribute('data-scale')) {
+                const scaleValue = img.getAttribute('data-scale');
+                // Apply the scale value as object-fit style
+                // Supported values: cover, contain, fill, scale-down, none
+                img.style.objectFit = scaleValue;
+            }
+        });
+    }
+    
+    showSlide(index) {
+        // Hide all images
+        this.images.forEach(img => img.classList.remove('active'));
+        this.dots.forEach(dot => dot.classList.remove('active'));
+        
+        // Show current image
+        this.images[index].classList.add('active');
+        this.dots[index].classList.add('active');
+    }
+    
+    next() {
+        this.currentIndex = (this.currentIndex + 1) % this.images.length;
+        this.showSlide(this.currentIndex);
+    }
+    
+    prev() {
+        this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+        this.showSlide(this.currentIndex);
+    }
+    
+    goToSlide(index) {
+        this.currentIndex = index;
+        this.showSlide(this.currentIndex);
+        this.resetAutoRotate();
+    }
+    
+    startAutoRotate() {
+        this.stopAutoRotate();
+        this.autoRotateInterval = setInterval(() => this.next(), this.autoRotateDelay);
+    }
+    
+    stopAutoRotate() {
+        if (this.autoRotateInterval) {
+            clearInterval(this.autoRotateInterval);
+            this.autoRotateInterval = null;
+        }
+    }
+    
+    resetAutoRotate() {
+        this.stopAutoRotate();
+        this.startAutoRotate();
+    }
+}
+
+// Initialize image rotator when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    new ImageRotator();
 });

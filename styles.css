@@ -224,12 +224,19 @@ body {
     font-size: 0.95rem;
 }
 
+/* Promise Section */
+.promise {
+    padding: 80px 20px;
+    background-color: var(--white);
+}
+
 /* About Section */
 .about {
     padding: 80px 20px;
-    background-color: white;
+    background-color: var(--light-gray);
 }
 
+.promise h2,
 .about h2,
 .why-running h2,
 .platform h2,
@@ -238,8 +245,35 @@ body {
 .contact h2 {
     font-size: 2.5rem;
     color: var(--primary-color);
-    margin-bottom: 50px;
+    margin-bottom: 15px;
     text-align: center;
+}
+
+.promise-content {
+    display: flex;
+    gap: 60px;
+    align-items: flex-start;
+}
+
+.promise-subsection {
+    padding-top: 10px;
+}
+
+.promise-text {
+    flex: 1;
+}
+
+.promise-text p {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.promise-text p::first-letter {
+    font-size: 1.2rem;
+    font-weight: normal;
+    color: var(--primary-color);
+    margin-right: .5px;
 }
 
 .about-content {
@@ -286,6 +320,7 @@ body {
     align-self: flex-start;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 10px;
     justify-content: space-between;
 }
@@ -293,7 +328,7 @@ body {
 .about-img {
     max-width: 100%;
     height: auto;
-    max-height: 450px;
+    max-height: 100%;
     border-radius: 10px;
 }
 
@@ -309,7 +344,7 @@ img.landscape {
 /* Why He Is Running Section */
 .why-running {
     padding: 80px 20px;
-    background-color: var(--light-gray);
+    background-color: var(--white);
 }
 
 .why-running-content {
@@ -334,6 +369,16 @@ img.landscape {
 .platform {
     padding: 80px 20px;
     background-color: var(--light-gray);
+}
+
+.platform-text {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.platform-text p {
+    margin: 0;
 }
 
 .platform-grid {
@@ -497,7 +542,7 @@ img.landscape {
 /* Contact Section */
 .contact {
     padding: 80px 20px;
-    background-color: var(--light-gray);
+    background-color: var(--white);
 }
 
 .contact-info-section {
@@ -695,6 +740,7 @@ img.landscape {
         grid-template-columns: 1fr;
     }
 
+    .propmise h2,
     .about h2,
     .platform h2,
     .get-involved h2,
@@ -707,6 +753,21 @@ img.landscape {
 
 @media (max-width: 480px) {
     
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1.1rem;
+    }
+
+    .platform-card,
+    .involvement-card {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 420px) {
     .nav-logo span {
         display: none;
     }
@@ -867,5 +928,131 @@ img.landscape {
 
     .error-suggestions {
         padding: 20px;
+    }
+}
+
+/* Image Rotator Styles */
+.image-rotator {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.rotator-image {
+    display: none;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.rotator-image.active {
+    display: block;
+    opacity: 1;
+}
+
+.rotator-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 5px;
+}
+
+.rotator-controls {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: rgba(6, 42, 87, 0.8);
+    padding: 10px 20px;
+    border-radius: 25px;
+    backdrop-filter: blur(5px);
+}
+
+.rotator-prev,
+.rotator-next {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    font-weight: bold;
+}
+
+.rotator-prev:hover,
+.rotator-next:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    transform: scale(1.1);
+}
+
+.rotator-dots {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.rotator-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.rotator-dot:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    transform: scale(1.2);
+}
+
+.rotator-dot.active {
+    background-color: var(--secondary-color);
+    width: 12px;
+    height: 12px;
+}
+
+/* Responsive adjustments for rotator */
+@media (max-width: 768px) {
+    .image-rotator {
+        max-width: 500px;
+        max-height: 500px;
+    }
+    
+    .rotator-controls {
+        bottom: 10px;
+        padding: 8px 15px;
+        gap: 10px;
+    }
+    
+    .rotator-prev,
+    .rotator-next {
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+    }
+    
+    .rotator-dot {
+        width: 8px;
+        height: 8px;
+    }
+    
+    .rotator-dot.active {
+        width: 10px;
+        height: 10px;
     }
 }
