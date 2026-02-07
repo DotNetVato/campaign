@@ -20,7 +20,7 @@ function openModal(type) {
             <p>Your donation helps us reach more voters and spread the message of leadership and integrity.</p>
             <p>Every contribution, regardless of size, makes a difference in our campaign to bring positive change to our community.</p>
             <div style="margin-top: 20px;">
-                <button onclick="window.open('https://www.paypal.com', '_blank');" class="btn btn-primary" style="width: 100%; margin-top: 15px;"><i class="fab fa-paypal"></i> Donate Now</button>
+                <button onclick="window.open('https://secure.anedot.com/beller-for-sheriff/d48de606-13ac-4121-ab85-d313c6db8d66', '_blank');" class="btn btn-primary" style="width: 100%; margin-top: 15px;"><i class="fas fa-donate"></i> Donate Now</button>
             </div>
             <p style="font-size: 0.9rem; margin-top: 20px; color: #666;">Paid for by Beller for Sheriff Campaign. Contributions are not tax-deductible.</p>
         `,
