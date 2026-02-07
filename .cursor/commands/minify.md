@@ -1,0 +1,1 @@
+when this command is called, publish to a folder called publish that minifies all html, css, and js files. if the publish folder does not exist, create it.
