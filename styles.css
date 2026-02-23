@@ -348,8 +348,9 @@ img.landscape {
 }
 
 .why-running-content {
-    max-width: 800px;
-    margin: 0 auto;
+    display: flex;
+    gap: 60px;
+    align-items: flex-start;
 }
 
 .why-running-content p {

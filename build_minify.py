@@ -1,6 +1,7 @@
 import os
 import re
 import shutil
+from datetime import datetime
 
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -52,12 +53,46 @@ def minify_js(content: str) -> str:
     Very conservative JS "minification":
     - trim each line
     - remove fully empty lines
-    - join with single space.
-    This avoids aggressive transformations that could break code.
+    - rejoin using newlines to preserve statement boundaries.
+
+    Note: Joining JavaScript statements onto a single line can change
+    semantics when code relies on automatic semicolon insertion. By
+    preserving newlines we still cut most indentation/spacing without
+    risking subtle breakage.
     """
     lines = [line.strip() for line in content.splitlines()]
     lines = [line for line in lines if line]
-    return " ".join(lines)
+    return "\n".join(lines)
+
+
+def generate_version_stamp() -> str:
+    """Return a cache-busting version string based on the current UTC timestamp."""
+    return datetime.utcnow().strftime("%Y%m%d%H%M%S")
+
+
+def apply_version_stamp_to_assets(content: str, version: str) -> str:
+    """
+    Update stylesheet and script query params to include the provided version.
+
+    This currently targets the main site assets (styles.css and script.js),
+    preserving any other attributes or paths.
+    """
+
+    # Update <link ... href="styles.css?v=...">
+    content = re.sub(
+        r'(href="styles\.css)(\?v=[^"]*)?(")',
+        rf'\1?v={version}\3',
+        content,
+    )
+
+    # Update <script ... src="script.js?v=...">
+    content = re.sub(
+        r'(src="script\.js)(\?v=[^"]*)?(")',
+        rf'\1?v={version}\3',
+        content,
+    )
+
+    return content
 
 
 def should_skip_dir(dirname: str) -> bool:
@@ -66,6 +101,9 @@ def should_skip_dir(dirname: str) -> bool:
 
 def publish() -> None:
     reset_publish_dir()
+
+    # Single version stamp for this build, applied to HTML asset links.
+    version = generate_version_stamp()
 
     for root, dirs, files in os.walk(PROJECT_ROOT):
         # Skip unwanted directories
@@ -95,6 +133,8 @@ def publish() -> None:
             if ext in {".html", ".htm"}:
                 with open(src_path, "r", encoding="utf-8") as f:
                     content = f.read()
+                # Apply version stamp to key assets before minifying.
+                content = apply_version_stamp_to_assets(content, version)
                 minified = minify_html(content)
                 with open(dest_path, "w", encoding="utf-8") as f:
                     f.write(minified)
