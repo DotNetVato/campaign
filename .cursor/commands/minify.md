@@ -1,1 +1,1 @@
-when this command is called, publish to a folder called publish that minifies all html, css, and js files. if the publish folder does not exist, create it, if the folder exists, overwrite only the contents in the publish folder.
+python3 ./build_minify.py

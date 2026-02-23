@@ -3,7 +3,6 @@ function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Modal functionality
 function openModal(type) {
     const modal = document.getElementById('modal');
     const modalBody = document.getElementById('modal-body');
@@ -72,7 +71,6 @@ function closeModal() {
     modal.style.display = 'none';
 }
 
-// Close modal when clicking outside of it
 window.onclick = function (event) {
     const modal = document.getElementById('modal');
     if (event.target == modal) {
@@ -81,7 +79,6 @@ window.onclick = function (event) {
 }
 
 
-// Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -95,7 +92,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Add scroll animation for elements coming into view
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -100px 0px'
@@ -110,7 +106,6 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe platform cards and involvement cards
 document.querySelectorAll('.platform-card, .involvement-card').forEach(card => {
     card.style.opacity = '0';
     card.style.transform = 'translateY(20px)';
@@ -126,7 +121,6 @@ hamburger.addEventListener('click', function () {
     navMenu.classList.toggle('active');
 });
 
-// Close menu when a link is clicked
 const navLinks = navMenu.querySelectorAll('a');
 navLinks.forEach(link => {
     link.addEventListener('click', function () {
@@ -135,7 +129,6 @@ navLinks.forEach(link => {
     });
 });
 
-// Image Rotator Functionality
 class ImageRotator {
     constructor() {
         this.currentIndex = 0;
@@ -144,7 +137,7 @@ class ImageRotator {
         this.prevBtn = document.querySelector('.rotator-prev');
         this.nextBtn = document.querySelector('.rotator-next');
         this.autoRotateInterval = null;
-        this.autoRotateDelay = 3000; // 5 seconds
+        this.autoRotateDelay = 3000;
         
         if (this.images.length === 0) return;
         
@@ -152,10 +145,8 @@ class ImageRotator {
     }
     
     init() {
-        // Apply initial scaling based on data-scale attributes
         this.applyScaling();
         
-        // Add event listeners
         this.prevBtn.addEventListener('click', () => this.prev());
         this.nextBtn.addEventListener('click', () => this.next());
         
@@ -163,34 +154,27 @@ class ImageRotator {
             dot.addEventListener('click', () => this.goToSlide(index));
         });
         
-        // Start auto-rotation
         this.startAutoRotate();
         
-        // Pause auto-rotation when user interacts
         const rotator = document.querySelector('.image-rotator');
         rotator.addEventListener('mouseenter', () => this.stopAutoRotate());
         rotator.addEventListener('mouseleave', () => this.startAutoRotate());
     }
     
     applyScaling() {
-        // Apply data-scale attribute to each image for flexible fitting
         this.images.forEach(imageContainer => {
             const img = imageContainer.querySelector('img');
             if (img && img.hasAttribute('data-scale')) {
                 const scaleValue = img.getAttribute('data-scale');
-                // Apply the scale value as object-fit style
-                // Supported values: cover, contain, fill, scale-down, none
                 img.style.objectFit = scaleValue;
             }
         });
     }
     
     showSlide(index) {
-        // Hide all images
         this.images.forEach(img => img.classList.remove('active'));
         this.dots.forEach(dot => dot.classList.remove('active'));
         
-        // Show current image
         this.images[index].classList.add('active');
         this.dots[index].classList.add('active');
     }
@@ -229,7 +213,6 @@ class ImageRotator {
     }
 }
 
-// Initialize image rotator when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new ImageRotator();
 });
