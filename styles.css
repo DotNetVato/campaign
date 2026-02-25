@@ -51,6 +51,12 @@ body {
     align-items: center;
 }
 
+.disclaimer {
+    font-size: 0.7rem;
+    color: #ccc;
+    margin-top: 10px;
+}
+
 .nav-logo {
     display: flex;
     align-items: center;
@@ -63,12 +69,13 @@ body {
 }
 
 .logo-img {
-    height: 50px;
+    height: 80px;
     width: auto;
 }
 
 .nav-menu {
     display: flex;
+    top: 110px;
     list-style: none;
     gap: 2rem;
     transition: var(--transition);
@@ -144,7 +151,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 20px 0px 20px;
+    padding: 0px 20px 0px 20px;
     max-width: 1200px;
     margin: 0 auto;
     gap: 40px;
@@ -226,13 +233,13 @@ body {
 
 /* Promise Section */
 .promise {
-    padding: 80px 20px;
+    padding: 110px 20px;
     background-color: var(--white);
 }
 
 /* About Section */
 .about {
-    padding: 80px 20px;
+    padding: 110px 20px;
     background-color: var(--light-gray);
 }
 
@@ -343,7 +350,7 @@ img.landscape {
 
 /* Why He Is Running Section */
 .why-running {
-    padding: 80px 20px;
+    padding: 110px 20px;
     background-color: var(--white);
 }
 
@@ -368,7 +375,7 @@ img.landscape {
 
 /* Platform Section */
 .platform {
-    padding: 80px 20px;
+    padding: 110px 20px;
     background-color: var(--light-gray);
 }
 
@@ -463,7 +470,7 @@ img.landscape {
 
 /* Get Involved Section */
 .get-involved {
-    padding: 80px 20px;
+    padding: 110px 20px;
     background-color: white;
 }
 
@@ -498,7 +505,7 @@ img.landscape {
 
 /* Education Section */
 .education {
-    padding: 80px 20px;
+    padding: 110px 20px;
     background-color: var(--light-gray);
 }
 
@@ -542,7 +549,7 @@ img.landscape {
 
 /* Contact Section */
 .contact {
-    padding: 80px 20px;
+    padding: 110px 20px;
     background-color: var(--white);
 }
 
@@ -645,7 +652,7 @@ img.landscape {
         display: none;
         gap: 0;
         position: absolute;
-        top: 70px;
+        top: 100px;
         left: 0;
         right: 0;
         flex-direction: column;
@@ -679,11 +686,11 @@ img.landscape {
     }
 
     .nav-donate-btn {
-        display: none;
+        display: flex;
     }
 
     .nav-donate-item {
-        display: block;
+        display: none;
     }
 
     .nav-donate-link {
@@ -741,6 +748,10 @@ img.landscape {
         grid-template-columns: 1fr;
     }
 
+    .nav-donate-item {
+        display: none;
+    }
+
     .propmise h2,
     .about h2,
     .platform h2,
@@ -766,6 +777,10 @@ img.landscape {
     .involvement-card {
         padding: 20px;
     }
+
+    .nav-donate-item {
+        display: none;
+    }
 }
 
 @media (max-width: 420px) {
@@ -784,6 +799,14 @@ img.landscape {
     .platform-card,
     .involvement-card {
         padding: 20px;
+    }
+
+    .nav-donate-btn{
+        display: none;
+    }
+
+    .nav-donate-item {
+        display: block;
     }
 }
 

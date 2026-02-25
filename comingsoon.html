@@ -201,5 +201,22 @@
 
     </div>
 </body>
-
 </html>
+    <script>
+        (function () {
+            function setFacebookTarget() {
+                var isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+                document.querySelectorAll('a[href*="facebook.com"]').forEach(function (a) {
+                    if (isDesktop) {
+                        a.setAttribute('target', '_blank');
+                        a.setAttribute('rel', 'noopener noreferrer');
+                    } else {
+                        a.removeAttribute('target');
+                        a.removeAttribute('rel');
+                    }
+                });
+            }
+            document.addEventListener('DOMContentLoaded', setFacebookTarget);
+            window.addEventListener('resize', setFacebookTarget);
+        })();
+    </script>
