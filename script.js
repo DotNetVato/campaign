@@ -47,7 +47,9 @@ function openModal(type) {
             <h2>Request a sign</h2>
             <p>Show your support for James Beller for Sheriff by requesting a campaign sign for your yard or business!</p>
             <p>Please provide your name, address, and contact information so we can deliver a sign to you.</p>
-            <p>Email us at <a href="mailto:BellerforSheriff@gmail.com"><strong>BellerforSheriff@gmail.com</strong></a></p>
+            <div style="margin-top: 20px;">
+                <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSfB-Mlnw2draZ89nFQnLev0lhTs7c-TWzdnphZrkht280ZxWg/viewform', '_blank');" class="btn btn-primary" style="width: 100%; margin-top: 15px;"><i class="fas fa-sign"></i> Request Your Sign</button>
+            </div>
         `,
         'community-engagement-and-public-trust': `
             <h2 style='text-align: center;'>🛡️</h2>
