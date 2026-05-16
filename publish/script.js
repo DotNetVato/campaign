@@ -153,7 +153,6 @@ donate: `
 <p>James Beller's approach to employee development is grounded in experience. As a former Training Captain and graduate of the FBI National Academy, he has focused on organizational growth and strengthening training programs that improve performance across the entire department. As Sheriff, he will continue investing in people to build a professional, prepared, and trusted Sheriff's Office that serves the community with integrity.</p>
 `
 };
-debugger;
 if (type === 'campaign-videos') {
 modalBody.innerHTML = renderCampaignVideoModal();
 } else {
