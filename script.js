@@ -3,8 +3,114 @@ function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+const campaignVideos = [
+    {
+        id: 'campaign-launch',
+        tabLabel: 'Campaign Launch',
+        mp4: 'media/campaignlaunch.mp4'
+    },
+    {
+        id: 'kenosha-tough',
+        tabLabel: 'Kenosha Tough',
+        mp4: 'media/kenoshatough.mp4'
+    }
+];
+
+function renderCampaignVideoModal() {
+    const tabs = campaignVideos
+        .map((video, index) => `
+            <button
+                class="video-tab ${index === 0 ? 'active' : ''}"
+                type="button"
+                role="tab"
+                aria-selected="${index === 0 ? 'true' : 'false'}"
+                data-video-id="${video.id}">
+                ${video.tabLabel}
+            </button>
+        `)
+        .join('');
+
+    return `
+        <div class="video-modal-header">
+            <h2>Campaign Videos</h2>
+        </div>
+        <div class="video-player-panel">
+            <div class="video-tabs" role="tablist" aria-label="Campaign videos">
+                ${tabs}
+            </div>
+            <video id="campaign-video-player" class="modal-video" autoplay muted controls playsinline>
+                Your browser does not support the video tag.
+            </video>
+            <p id="video-playback-note" style="display: none; margin-top: 12px; color: #b00020;">
+                This browser cannot play this video format. Please try Safari or provide an MP4 version for universal playback.
+            </p>
+        </div>
+    `;
+}
+
+function selectCampaignVideo(modal, videoId) {
+    const videoData = campaignVideos.find((video) => video.id === videoId) || campaignVideos[0];
+    const player = modal.querySelector('#campaign-video-player');
+    const note = modal.querySelector('#video-playback-note');
+    const tabButtons = modal.querySelectorAll('.video-tab');
+
+    if (!player || !videoData) {
+        return;
+    }
+
+    tabButtons.forEach((tabButton) => {
+        const isActive = tabButton.getAttribute('data-video-id') === videoData.id;
+        tabButton.classList.toggle('active', isActive);
+        tabButton.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+
+    player.pause();
+    player.innerHTML = '';
+
+    if (videoData.mp4) {
+        const mp4Source = document.createElement('source');
+        mp4Source.src = videoData.mp4;
+        mp4Source.type = 'video/mp4';
+        player.appendChild(mp4Source);
+    }
+
+    if (videoData.mov) {
+        const movSource = document.createElement('source');
+        movSource.src = videoData.mov;
+        player.appendChild(movSource);
+    }
+
+    player.load();
+    if (note) {
+        note.style.display = 'none';
+    }
+
+    const playPromise = player.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(() => {
+            if (note) {
+                note.style.display = 'block';
+            }
+        });
+    }
+}
+
+function setupCampaignVideoTabs(modal) {
+    const tabButtons = modal.querySelectorAll('.video-tab');
+
+    tabButtons.forEach((tabButton) => {
+        tabButton.addEventListener('click', () => {
+            const videoId = tabButton.getAttribute('data-video-id');
+            if (videoId) {
+                selectCampaignVideo(modal, videoId);
+            }
+        });
+    });
+}
+
 function openModal(type) {
     const modal = document.getElementById('modal');
+    const modalContent = modal.querySelector('.modal-content');
     const modalBody = document.getElementById('modal-body');
 
     const content = {
@@ -63,20 +169,42 @@ function openModal(type) {
             <p>James Beller's approach to employee development is grounded in experience. As a former Training Captain and graduate of the FBI National Academy, he has focused on organizational growth and strengthening training programs that improve performance across the entire department. As Sheriff, he will continue investing in people to build a professional, prepared, and trusted Sheriff's Office that serves the community with integrity.</p>
         `
     };
+debugger;
+    if (type === 'campaign-videos') {
+        modalBody.innerHTML = renderCampaignVideoModal();
+    } else {
+        modalBody.innerHTML = content[type] || '<p>Content not found</p>';
+    }
 
-    modalBody.innerHTML = content[type] || '<p>Content not found</p>';
-    modal.style.display = 'block';
+    modalContent.classList.toggle('video-modal', type === 'campaign-videos');
+
+    if (type === 'campaign-videos') {
+        setupCampaignVideoTabs(modal);
+        if (campaignVideos.length > 0) {
+            selectCampaignVideo(modal, campaignVideos[0].id);
+        }
+    }
+
+    modal.classList.add('show');
 }
 
 function closeModal() {
     const modal = document.getElementById('modal');
-    modal.style.display = 'none';
+    const modalContent = modal.querySelector('.modal-content');
+
+    modal.querySelectorAll('video').forEach((video) => {
+        video.pause();
+        video.currentTime = 0;
+    });
+
+    modalContent.classList.remove('video-modal');
+    modal.classList.remove('show');
 }
 
 window.onclick = function (event) {
     const modal = document.getElementById('modal');
     if (event.target == modal) {
-        modal.style.display = 'none';
+        closeModal();
     }
 }
 
@@ -217,4 +345,5 @@ class ImageRotator {
 
 document.addEventListener('DOMContentLoaded', () => {
     new ImageRotator();
+    openModal('campaign-videos');
 });
