@@ -1,7 +1,7 @@
 import os
 import re
 import shutil
-from datetime import datetime
+from datetime import datetime, timezone
 
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -67,7 +67,7 @@ def minify_js(content: str) -> str:
 
 def generate_version_stamp() -> str:
     """Return a cache-busting version string based on the current UTC timestamp."""
-    return datetime.utcnow().strftime("%Y%m%d%H%M%S")
+    return datetime.now(timezone.utc).strftime("%Y%m%d%H%M%S")
 
 
 def apply_version_stamp_to_assets(content: str, version: str) -> str:

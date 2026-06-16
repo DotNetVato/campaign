@@ -1,4 +1,80 @@
 
+const FACEBOOK_PROFILE_URL = 'https://www.facebook.com/profile.php?id=61586307804834';
+
+function setFacebookLinkTargets() {
+    const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+    document.querySelectorAll('a[href*="facebook.com"]').forEach((link) => {
+        if (isDesktop) {
+            link.setAttribute('target', '_blank');
+            link.setAttribute('rel', 'noopener noreferrer');
+        } else {
+            link.removeAttribute('target');
+            link.removeAttribute('rel');
+        }
+    });
+}
+
+function createFacebookCta(options = {}) {
+    const {
+        modifier = '',
+        showDivider = true,
+        dividerText = 'Stay Connected',
+        title = 'Follow the Campaign',
+        subtitle = 'News, updates & community events',
+        ctaText = 'Visit Page'
+    } = options;
+
+    const root = document.createElement('div');
+    root.className = modifier ? `facebook-cta facebook-cta--${modifier}` : 'facebook-cta';
+
+    if (showDivider) {
+        const divider = document.createElement('div');
+        divider.className = 'facebook-cta__divider';
+        divider.setAttribute('aria-hidden', 'true');
+        divider.innerHTML = `
+            <span class="facebook-cta__divider-line"></span>
+            <span class="facebook-cta__divider-text">${dividerText}</span>
+            <span class="facebook-cta__divider-line"></span>
+        `;
+        root.appendChild(divider);
+    }
+
+    const link = document.createElement('a');
+    link.className = 'facebook-cta__link';
+    link.href = FACEBOOK_PROFILE_URL;
+    link.setAttribute('aria-label', 'Follow Beller for Sheriff on Facebook');
+    link.innerHTML = `
+        <span class="facebook-cta__icon" aria-hidden="true">
+            <i class="fab fa-facebook-f"></i>
+        </span>
+        <span class="facebook-cta__copy">
+            <span class="facebook-cta__title">${title}</span>
+            <span class="facebook-cta__subtitle">${subtitle}</span>
+        </span>
+        <span class="facebook-cta__action" aria-hidden="true">
+            <span>${ctaText}</span>
+            <i class="fas fa-arrow-right"></i>
+        </span>
+    `;
+    root.appendChild(link);
+
+    return root;
+}
+
+function mountFacebookCtas() {
+    document.querySelectorAll('[data-facebook-cta]').forEach((placeholder) => {
+        const cta = createFacebookCta({
+            modifier: placeholder.dataset.modifier || '',
+            showDivider: placeholder.dataset.showDivider !== 'false',
+            dividerText: placeholder.dataset.dividerText || 'Stay Connected',
+            title: placeholder.dataset.title || 'Follow the Campaign',
+            subtitle: placeholder.dataset.subtitle || 'News, updates & community events',
+            ctaText: placeholder.dataset.ctaText || 'Visit Page'
+        });
+        placeholder.replaceWith(cta);
+    });
+}
+
 function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -13,11 +89,57 @@ const campaignVideos = [
         id: 'kenosha-tough',
         tabLabel: 'Kenosha Tough',
         mp4: 'media/kenoshatough.mp4'
+    },
+    {
+        id: 'memorial-day-remembrance',
+        tabLabel: 'Memorial Day Remembrance',
+        mp4: 'media/memorialdayremembrance.mp4'
+    },
+    {
+        id: 'test-video',
+        tabLabel: 'test-video',
+        devOnly: true,
+        mp4: 'media/test-video-does-not-exist.mp4'
     }
 ];
 
+function isDevelopmentMode() {
+    const host = window.location.hostname;
+    return window.location.protocol === 'file:' || host === 'localhost' || host === '127.0.0.1';
+}
+
+function getVisibleCampaignVideos() {
+    const devMode = isDevelopmentMode();
+    return campaignVideos.filter((video) => !video.devOnly || devMode);
+}
+
+function bindCampaignVideoLoadingEvents(player) {
+    if (!player || player.dataset.loadingEventsBound === 'true') {
+        return;
+    }
+
+    const showLoading = () => {
+        player.classList.add('video-loading');
+        player.controls = false;
+    };
+
+    const hideLoading = () => {
+        player.classList.remove('video-loading');
+        player.controls = true;
+    };
+
+    player.addEventListener('loadstart', showLoading);
+    player.addEventListener('waiting', showLoading);
+    player.addEventListener('canplay', hideLoading);
+    player.addEventListener('loadeddata', hideLoading);
+    player.addEventListener('playing', hideLoading);
+
+    player.dataset.loadingEventsBound = 'true';
+}
+
 function renderCampaignVideoModal() {
-    const tabs = campaignVideos
+    const availableVideos = getVisibleCampaignVideos();
+    const tabs = availableVideos
         .map((video, index) => `
             <button
                 class="video-tab ${index === 0 ? 'active' : ''}"
@@ -38,9 +160,14 @@ function renderCampaignVideoModal() {
             <div class="video-tabs" role="tablist" aria-label="Campaign videos">
                 ${tabs}
             </div>
-            <video id="campaign-video-player" class="modal-video" autoplay muted controls playsinline>
-                Your browser does not support the video tag.
-            </video>
+            <div class="video-stage">
+                <video id="campaign-video-player" class="modal-video" autoplay muted controls playsinline>
+                    Your browser does not support the video tag.
+                </video>
+                <div id="video-status-overlay" class="video-status-overlay" aria-hidden="true">
+                    <div id="video-status-banner" class="video-status-banner"></div>
+                </div>
+            </div>
             <p id="video-playback-note" style="display: none; margin-top: 12px; color: #b00020;">
                 This browser cannot play this video format. Please try Safari or provide an MP4 version for universal playback.
             </p>
@@ -49,14 +176,66 @@ function renderCampaignVideoModal() {
 }
 
 function selectCampaignVideo(modal, videoId) {
-    const videoData = campaignVideos.find((video) => video.id === videoId) || campaignVideos[0];
+    const availableVideos = getVisibleCampaignVideos();
+    const videoData = availableVideos.find((video) => video.id === videoId) || availableVideos[0];
     const player = modal.querySelector('#campaign-video-player');
+    const statusOverlay = modal.querySelector('#video-status-overlay');
+    const statusBanner = modal.querySelector('#video-status-banner');
     const note = modal.querySelector('#video-playback-note');
     const tabButtons = modal.querySelectorAll('.video-tab');
 
     if (!player || !videoData) {
         return;
     }
+
+    bindCampaignVideoLoadingEvents(player);
+
+    // Track the active load request to ignore stale async events from prior selections.
+    const loadRequestId = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    player.dataset.loadRequestId = loadRequestId;
+
+    const unavailableMessage = 'This video is unavailable right now. Please try another video.';
+    const formatMessage = 'This browser cannot play this video format. Please try Safari or provide an MP4 version for universal playback.';
+
+    const clearFailureTimeout = () => {
+        if (player.dataset.failureTimeoutId) {
+            window.clearTimeout(Number(player.dataset.failureTimeoutId));
+            delete player.dataset.failureTimeoutId;
+        }
+    };
+
+    const isCurrentLoadRequest = () => player.dataset.loadRequestId === loadRequestId;
+
+    const setStatusOverlay = (message = '') => {
+        if (!statusOverlay || !statusBanner) {
+            return;
+        }
+
+        if (message) {
+            statusBanner.textContent = message;
+            statusOverlay.classList.add('show');
+            return;
+        }
+
+        statusBanner.textContent = '';
+        statusOverlay.classList.remove('show');
+    };
+
+    const showUnavailable = () => {
+        if (!isCurrentLoadRequest()) {
+            return;
+        }
+
+        clearFailureTimeout();
+        player.classList.add('video-loading');
+        player.controls = false;
+        setStatusOverlay(unavailableMessage);
+
+        if (note) {
+            note.textContent = unavailableMessage;
+            note.style.display = 'none';
+        }
+    };
 
     tabButtons.forEach((tabButton) => {
         const isActive = tabButton.getAttribute('data-video-id') === videoData.id;
@@ -66,30 +245,80 @@ function selectCampaignVideo(modal, videoId) {
 
     player.pause();
     player.innerHTML = '';
+    player.classList.add('video-loading');
+    player.controls = false;
+    setStatusOverlay('');
 
     if (videoData.mp4) {
         const mp4Source = document.createElement('source');
         mp4Source.src = videoData.mp4;
         mp4Source.type = 'video/mp4';
+        mp4Source.onerror = showUnavailable;
         player.appendChild(mp4Source);
     }
 
     if (videoData.mov) {
         const movSource = document.createElement('source');
         movSource.src = videoData.mov;
+        movSource.onerror = showUnavailable;
         player.appendChild(movSource);
     }
 
     player.load();
     if (note) {
         note.style.display = 'none';
+        note.textContent = formatMessage;
     }
+
+    player.onerror = showUnavailable;
+
+    const markLoaded = () => {
+        if (!isCurrentLoadRequest()) {
+            return;
+        }
+
+        clearFailureTimeout();
+        setStatusOverlay('');
+        if (note) {
+            note.style.display = 'none';
+        }
+    };
+
+    player.addEventListener('loadeddata', markLoaded, { once: true });
+    player.addEventListener('canplay', markLoaded, { once: true });
+    player.addEventListener('playing', markLoaded, { once: true });
+
+    const timeoutId = window.setTimeout(() => {
+        if (!isCurrentLoadRequest()) {
+            return;
+        }
+
+        if (player.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) {
+            showUnavailable();
+        }
+    }, 2500);
+    player.dataset.failureTimeoutId = String(timeoutId);
 
     const playPromise = player.play();
     if (playPromise && typeof playPromise.catch === 'function') {
-        playPromise.catch(() => {
+        playPromise.catch((error) => {
+            if (!isCurrentLoadRequest()) {
+                return;
+            }
+
+            clearFailureTimeout();
+
+            if (error && error.name === 'NotAllowedError') {
+                player.classList.remove('video-loading');
+                player.controls = true;
+                setStatusOverlay('');
+                return;
+            }
+
+            setStatusOverlay(formatMessage);
             if (note) {
-                note.style.display = 'block';
+                note.textContent = formatMessage;
+                note.style.display = 'none';
             }
         });
     }
@@ -180,8 +409,9 @@ function openModal(type) {
 
     if (type === 'campaign-videos') {
         setupCampaignVideoTabs(modal);
-        if (campaignVideos.length > 0) {
-            selectCampaignVideo(modal, campaignVideos[0].id);
+        const availableVideos = getVisibleCampaignVideos();
+        if (availableVideos.length > 0) {
+            selectCampaignVideo(modal, availableVideos[0].id);
         }
     }
 
@@ -344,6 +574,10 @@ class ImageRotator {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    mountFacebookCtas();
+    setFacebookLinkTargets();
     new ImageRotator();
     openModal('campaign-videos');
 });
+
+window.addEventListener('resize', setFacebookLinkTargets);

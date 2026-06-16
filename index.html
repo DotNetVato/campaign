@@ -62,6 +62,7 @@
                     <button class="btn btn-secondary"
                         onclick="openModal('campaign-videos')">Campaign Videos</button>
                 </div>
+                <div data-facebook-cta data-modifier="hero"></div>
             </div>
             <div class="hero-image">
                 <img src="img/beller_nobg.png" alt="Beller for Sheriff" class="hero-img">
@@ -305,13 +306,7 @@
                         <span class="label">Phone:</span>
                         <a href="tel:+12622378137">(262) 237-8137</a>
                     </div>
-                    <div class="info-item">
-                        <span class="label">Follow Us:</span>
-                        <div class="social-links">
-                            <a href="https://www.facebook.com/profile.php?id=61586307804834"
-                                class="social-icon">Facebook</a>
-                        </div>
-                    </div>
+                    <div data-facebook-cta data-modifier="contact" data-divider-text="Follow Us"></div>
                 </div>
             </div>
         </section>
@@ -332,24 +327,6 @@
             </div>
         </div>
     <script src="script.js?v=VERSION_STAMP"></script>
-    <script>
-        (function () {
-            function setFacebookTarget() {
-                var isDesktop = window.matchMedia('(min-width: 1024px)').matches;
-                document.querySelectorAll('a[href*="facebook.com"]').forEach(function (a) {
-                    if (isDesktop) {
-                        a.setAttribute('target', '_blank');
-                        a.setAttribute('rel', 'noopener noreferrer');
-                    } else {
-                        a.removeAttribute('target');
-                        a.removeAttribute('rel');
-                    }
-                });
-            }
-            document.addEventListener('DOMContentLoaded', setFacebookTarget);
-            window.addEventListener('resize', setFacebookTarget);
-        })();
-    </script>
     <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
     <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade"/></noscript>
 </body>
