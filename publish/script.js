@@ -71,6 +71,16 @@ window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 const campaignVideos = [
 {
+id: 'breakfast',
+tabLabel: 'Dairy Breakfast',
+mp4: 'media/breakfast.mp4'
+},
+{
+id: 'daevon',
+tabLabel: 'Crossing Paths',
+mp4: 'media/daevon.mp4'
+},
+{
 id: 'campaign-launch',
 tabLabel: 'Campaign Launch',
 mp4: 'media/campaignlaunch.mp4'
