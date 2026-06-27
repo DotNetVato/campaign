@@ -71,6 +71,12 @@ window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 const campaignVideos = [
 {
+id: 'beller-bash',
+tabLabel: 'Beller Bash',
+mp4: 'media/bellerbash.mp4',
+linkUrl: 'https://secure.anedot.com/beller-for-sheriff/cadd22fd-df9f-4de5-a77a-0469755382e7'
+},
+{
 id: 'breakfast',
 tabLabel: 'Dairy Breakfast',
 mp4: 'media/breakfast.mp4'
@@ -129,28 +135,39 @@ player.addEventListener('loadeddata', hideLoading);
 player.addEventListener('playing', hideLoading);
 player.dataset.loadingEventsBound = 'true';
 }
+function bindCampaignVideoLinkEvents(player) {
+if (!player || player.dataset.linkEventsBound === 'true') {
+return;
+}
+const supportsPrecisePointer = window.matchMedia('(pointer: fine)').matches;
+if (!supportsPrecisePointer) {
+player.dataset.linkEventsBound = 'true';
+return;
+}
+player.addEventListener('click', () => {
+const linkUrl = player.dataset.linkUrl;
+if (!linkUrl) {
+return;
+}
+window.open(linkUrl, '_blank', 'noopener,noreferrer');
+});
+player.dataset.linkEventsBound = 'true';
+}
 function renderCampaignVideoModal() {
 const availableVideos = getVisibleCampaignVideos();
-const tabs = availableVideos
+const options = availableVideos
 .map((video, index) => `
-<button
-class="video-tab ${index === 0 ? 'active' : ''}"
-type="button"
-role="tab"
-aria-selected="${index === 0 ? 'true' : 'false'}"
-data-video-id="${video.id}">
-${video.tabLabel}
-</button>
+<option value="${video.id}" ${index === 0 ? 'selected' : ''}>${video.tabLabel}</option>
 `)
 .join('');
 return `
 <div class="video-modal-header">
 <h2>Campaign Videos</h2>
+<select id="campaign-video-select" aria-label="Choose campaign video" style="min-width: 220px; width: min(100%, 320px); padding: 10px 12px; border: 1px solid var(--primary-color); border-radius: 8px; font-size: 1rem;">
+${options}
+</select>
 </div>
 <div class="video-player-panel">
-<div class="video-tabs" role="tablist" aria-label="Campaign videos">
-${tabs}
-</div>
 <div class="video-stage">
 <video id="campaign-video-player" class="modal-video" autoplay muted controls playsinline>
 Your browser does not support the video tag.
@@ -159,6 +176,15 @@ Your browser does not support the video tag.
 <div id="video-status-banner" class="video-status-banner"></div>
 </div>
 </div>
+<a
+id="video-link-action"
+class="btn btn-primary"
+href="#"
+target="_blank"
+rel="noopener noreferrer"
+style="display: none; margin-top: 12px; width: 100%; text-align: center; background-color: dodgerblue; border-color: dodgerblue; color: white;">
+Get Tickets Now!
+</a>
 <p id="video-playback-note" style="display: none; margin-top: 12px; color: #b00020;">
 This browser cannot play this video format. Please try Safari or provide an MP4 version for universal playback.
 </p>
@@ -172,11 +198,30 @@ const player = modal.querySelector('#campaign-video-player');
 const statusOverlay = modal.querySelector('#video-status-overlay');
 const statusBanner = modal.querySelector('#video-status-banner');
 const note = modal.querySelector('#video-playback-note');
-const tabButtons = modal.querySelectorAll('.video-tab');
+const linkAction = modal.querySelector('#video-link-action');
+const videoSelect = modal.querySelector('#campaign-video-select');
 if (!player || !videoData) {
 return;
 }
 bindCampaignVideoLoadingEvents(player);
+bindCampaignVideoLinkEvents(player);
+if (videoData.linkUrl) {
+player.dataset.linkUrl = videoData.linkUrl;
+player.style.cursor = 'pointer';
+player.setAttribute('title', 'Click to open related campaign link');
+if (linkAction) {
+linkAction.href = videoData.linkUrl;
+linkAction.style.display = 'inline-block';
+}
+} else {
+delete player.dataset.linkUrl;
+player.style.cursor = '';
+player.removeAttribute('title');
+if (linkAction) {
+linkAction.removeAttribute('href');
+linkAction.style.display = 'none';
+}
+}
 // Track the active load request to ignore stale async events from prior selections.
 const loadRequestId = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 player.dataset.loadRequestId = loadRequestId;
@@ -214,11 +259,9 @@ note.textContent = unavailableMessage;
 note.style.display = 'none';
 }
 };
-tabButtons.forEach((tabButton) => {
-const isActive = tabButton.getAttribute('data-video-id') === videoData.id;
-tabButton.classList.toggle('active', isActive);
-tabButton.setAttribute('aria-selected', isActive ? 'true' : 'false');
-});
+if (videoSelect) {
+videoSelect.value = videoData.id;
+}
 player.pause();
 player.innerHTML = '';
 player.classList.add('video-loading');
@@ -286,15 +329,16 @@ note.style.display = 'none';
 });
 }
 }
-function setupCampaignVideoTabs(modal) {
-const tabButtons = modal.querySelectorAll('.video-tab');
-tabButtons.forEach((tabButton) => {
-tabButton.addEventListener('click', () => {
-const videoId = tabButton.getAttribute('data-video-id');
+function setupCampaignVideoSelection(modal) {
+const videoSelect = modal.querySelector('#campaign-video-select');
+if (!videoSelect) {
+return;
+}
+videoSelect.addEventListener('change', () => {
+const videoId = videoSelect.value;
 if (videoId) {
 selectCampaignVideo(modal, videoId);
 }
-});
 });
 }
 function openModal(type) {
@@ -364,7 +408,7 @@ modalBody.innerHTML = content[type] || '<p>Content not found</p>';
 }
 modalContent.classList.toggle('video-modal', type === 'campaign-videos');
 if (type === 'campaign-videos') {
-setupCampaignVideoTabs(modal);
+setupCampaignVideoSelection(modal);
 const availableVideos = getVisibleCampaignVideos();
 if (availableVideos.length > 0) {
 selectCampaignVideo(modal, availableVideos[0].id);

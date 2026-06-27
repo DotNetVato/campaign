@@ -92,6 +92,30 @@ body {
     color: var(--secondary-color);
 }
 
+.nav-cta-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-bash-btn {
+    padding: 8px 20px;
+    background-color: dodgerblue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+.nav-bash-btn:hover {
+    background-color: deepskyblue;
+    transform: translateY(-2px);
+}
+
 .nav-donate-btn {
     padding: 8px 20px;
     background-color: var(--secondary-color);
@@ -105,12 +129,21 @@ body {
     white-space: nowrap;
 }
 
+.nav-bash-btn,
+.nav-donate-btn {
+    max-width: 100%;
+}
+
 .nav-donate-btn:hover {
     background-color: #e0b585;
     transform: translateY(-2px);
 }
 
 .nav-donate-item {
+    display: none;
+}
+
+.nav-bash-item {
     display: none;
 }
 
@@ -873,6 +906,8 @@ img.landscape {
 .video-modal-header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    gap: 12px;
     min-height: 64px;
     padding: 14px 60px 14px 20px;
     background-color: var(--primary-color);
@@ -945,6 +980,14 @@ img.landscape {
 
 
 /* Responsive Design */
+@media (max-width: 1100px) {
+    .nav-cta-buttons {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}
+
 @media (max-width: 930px) {
         .nav-menu {
         display: none;
@@ -983,12 +1026,30 @@ img.landscape {
         display: flex;
     }
 
-    .nav-donate-btn {
+    .nav-cta-buttons {
         display: flex;
     }
 
     .nav-donate-item {
         display: none;
+    }
+
+    .nav-bash-item {
+        display: none;
+    }
+
+    .nav-bash-link {
+        background-color: dodgerblue;
+        color: white !important;
+        font-weight: 700;
+        border-radius: 5px;
+        margin: 8px 16px;
+        text-align: center;
+    }
+
+    .nav-bash-link:hover {
+        background-color: deepskyblue;
+        color: white !important;
     }
 
     .nav-donate-link {
@@ -1049,12 +1110,18 @@ img.landscape {
     }
 
     .video-modal-header {
+        flex-wrap: wrap;
+        justify-content: flex-start;
         min-height: 58px;
         padding: 12px 52px 12px 14px;
     }
 
     .video-modal-header h2 {
         font-size: 1.1rem;
+    }
+
+    .video-modal-header #campaign-video-select {
+        width: 100% !important;
     }
 
     .video-player-panel {
@@ -1114,7 +1181,8 @@ img.landscape {
         padding: 20px;
     }
 
-    .nav-donate-item {
+    .nav-donate-item,
+    .nav-bash-item {
         display: none;
     }
 }
@@ -1137,10 +1205,11 @@ img.landscape {
         padding: 20px;
     }
 
-    .nav-donate-btn{
+    .nav-cta-buttons {
         display: none;
     }
 
+    .nav-bash-item,
     .nav-donate-item {
         display: block;
     }
