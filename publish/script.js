@@ -11,6 +11,23 @@ link.removeAttribute('rel');
 }
 });
 }
+function syncNavCtaButtonWidths() {
+const bashButton = document.querySelector('.nav-bash-btn');
+const donateButton = document.querySelector('.nav-donate-btn');
+if (!bashButton || !donateButton) {
+return;
+}
+// Reset to natural width before measuring so resizing stays accurate.
+bashButton.style.width = 'auto';
+donateButton.style.width = 'auto';
+const bashWidth = Math.ceil(bashButton.getBoundingClientRect().width);
+if (!Number.isFinite(bashWidth) || bashWidth <= 0) {
+return;
+}
+const targetWidth = `${bashWidth}px`;
+bashButton.style.width = targetWidth;
+donateButton.style.width = targetWidth;
+}
 function createFacebookCta(options = {}) {
 const {
 modifier = '',
@@ -545,7 +562,10 @@ this.startAutoRotate();
 document.addEventListener('DOMContentLoaded', () => {
 mountFacebookCtas();
 setFacebookLinkTargets();
+syncNavCtaButtonWidths();
 new ImageRotator();
 openModal('campaign-videos');
 });
 window.addEventListener('resize', setFacebookLinkTargets);
+window.addEventListener('resize', syncNavCtaButtonWidths);
+window.addEventListener('load', syncNavCtaButtonWidths);
