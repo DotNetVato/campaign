@@ -88,10 +88,14 @@ window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 const campaignVideos = [
 {
-id: 'beller-bash',
-tabLabel: 'Beller Bash',
-mp4: 'media/bellerbash.mp4',
-linkUrl: 'https://secure.anedot.com/beller-for-sheriff/cadd22fd-df9f-4de5-a77a-0469755382e7'
+id: 'messagefromdaevon',
+tabLabel: 'Message From Daevon',
+mp4: 'media/messagefromdaevon.mp4'
+},
+{
+id: 'earlyvotinggetoutandvote',
+tabLabel: 'Early Voting',
+mp4: 'media/earlyvotinggetoutandvote.mp4'
 },
 {
 id: 'beller-civic-veterans-parade',
@@ -128,6 +132,12 @@ id: 'test-video',
 tabLabel: 'test-video',
 devOnly: true,
 mp4: 'media/test-video-does-not-exist.mp4'
+},
+{
+id: 'beller-bash',
+tabLabel: 'Beller Bash',
+mp4: 'media/bellerbash.mp4',
+linkUrl: 'https://secure.anedot.com/beller-for-sheriff/cadd22fd-df9f-4de5-a77a-0469755382e7'
 }
 ];
 function isDevelopmentMode() {

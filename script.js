@@ -102,11 +102,15 @@ function scrollToTop() {
 }
 
 const campaignVideos = [
+     {
+        id: 'messagefromdaevon',
+        tabLabel: 'Message From Daevon',
+        mp4: 'media/messagefromdaevon.mp4'
+    },
     {
-        id: 'beller-bash',
-        tabLabel: 'Beller Bash',
-        mp4: 'media/bellerbash.mp4',
-        linkUrl: 'https://secure.anedot.com/beller-for-sheriff/cadd22fd-df9f-4de5-a77a-0469755382e7'
+        id: 'earlyvotinggetoutandvote',
+        tabLabel: 'Early Voting',
+        mp4: 'media/earlyvotinggetoutandvote.mp4'
     },
     {
         id: 'beller-civic-veterans-parade',
@@ -143,6 +147,12 @@ const campaignVideos = [
         tabLabel: 'test-video',
         devOnly: true,
         mp4: 'media/test-video-does-not-exist.mp4'
+    },
+    {
+        id: 'beller-bash',
+        tabLabel: 'Beller Bash',
+        mp4: 'media/bellerbash.mp4',
+        linkUrl: 'https://secure.anedot.com/beller-for-sheriff/cadd22fd-df9f-4de5-a77a-0469755382e7'
     }
 ];
 
@@ -585,29 +595,29 @@ class ImageRotator {
         this.nextBtn = document.querySelector('.rotator-next');
         this.autoRotateInterval = null;
         this.autoRotateDelay = 3000;
-        
+
         if (this.images.length === 0) return;
-        
+
         this.init();
     }
-    
+
     init() {
         this.applyScaling();
-        
+
         this.prevBtn.addEventListener('click', () => this.prev());
         this.nextBtn.addEventListener('click', () => this.next());
-        
+
         this.dots.forEach((dot, index) => {
             dot.addEventListener('click', () => this.goToSlide(index));
         });
-        
+
         this.startAutoRotate();
-        
+
         const rotator = document.querySelector('.image-rotator');
         rotator.addEventListener('mouseenter', () => this.stopAutoRotate());
         rotator.addEventListener('mouseleave', () => this.startAutoRotate());
     }
-    
+
     applyScaling() {
         this.images.forEach(imageContainer => {
             const img = imageContainer.querySelector('img');
@@ -617,43 +627,43 @@ class ImageRotator {
             }
         });
     }
-    
+
     showSlide(index) {
         this.images.forEach(img => img.classList.remove('active'));
         this.dots.forEach(dot => dot.classList.remove('active'));
-        
+
         this.images[index].classList.add('active');
         this.dots[index].classList.add('active');
     }
-    
+
     next() {
         this.currentIndex = (this.currentIndex + 1) % this.images.length;
         this.showSlide(this.currentIndex);
     }
-    
+
     prev() {
         this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
         this.showSlide(this.currentIndex);
     }
-    
+
     goToSlide(index) {
         this.currentIndex = index;
         this.showSlide(this.currentIndex);
         this.resetAutoRotate();
     }
-    
+
     startAutoRotate() {
         this.stopAutoRotate();
         this.autoRotateInterval = setInterval(() => this.next(), this.autoRotateDelay);
     }
-    
+
     stopAutoRotate() {
         if (this.autoRotateInterval) {
             clearInterval(this.autoRotateInterval);
             this.autoRotateInterval = null;
         }
     }
-    
+
     resetAutoRotate() {
         this.stopAutoRotate();
         this.startAutoRotate();

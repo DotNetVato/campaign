@@ -99,6 +99,7 @@ body {
 }
 
 .nav-bash-btn {
+    display: none !important;
     padding: 8px 20px;
     background-color: dodgerblue;
     color: white;
