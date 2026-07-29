@@ -213,6 +213,32 @@ function bindCampaignVideoLinkEvents(player) {
     player.dataset.linkEventsBound = 'true';
 }
 
+function bindCampaignVideoEndedEvents(modal, player) {
+    if (!modal || !player || player.dataset.endedEventsBound === 'true') {
+        return;
+    }
+
+    player.addEventListener('ended', () => {
+        const availableVideos = getVisibleCampaignVideos();
+        if (availableVideos.length === 0) {
+            return;
+        }
+
+        const videoSelect = modal.querySelector('#campaign-video-select');
+        const currentVideoId = videoSelect ? videoSelect.value : '';
+        const currentIndex = availableVideos.findIndex((video) => video.id === currentVideoId);
+        const safeCurrentIndex = currentIndex >= 0 ? currentIndex : 0;
+        const nextIndex = (safeCurrentIndex + 1) % availableVideos.length;
+        const nextVideo = availableVideos[nextIndex];
+
+        if (nextVideo) {
+            selectCampaignVideo(modal, nextVideo.id);
+        }
+    });
+
+    player.dataset.endedEventsBound = 'true';
+}
+
 function renderCampaignVideoModal() {
     const availableVideos = getVisibleCampaignVideos();
     const options = availableVideos
@@ -269,6 +295,7 @@ function selectCampaignVideo(modal, videoId) {
 
     bindCampaignVideoLoadingEvents(player);
     bindCampaignVideoLinkEvents(player);
+    bindCampaignVideoEndedEvents(modal, player);
 
     if (videoData.linkUrl) {
         player.dataset.linkUrl = videoData.linkUrl;
