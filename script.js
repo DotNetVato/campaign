@@ -104,7 +104,7 @@ function scrollToTop() {
 const campaignVideos = [
      {
         id: 'messagefromdaevon',
-        tabLabel: 'Message From Daevon',
+        tabLabel: 'Message From Dae\'von',
         mp4: 'media/messagefromdaevon.mp4'
     },
     {
