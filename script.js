@@ -109,6 +109,11 @@ const campaignVideos = [
         linkUrl: 'https://secure.anedot.com/beller-for-sheriff/cadd22fd-df9f-4de5-a77a-0469755382e7'
     },
     {
+        id: 'beller-civic-veterans-parade',
+        tabLabel: 'Civic Veterans Parade',
+        mp4: 'media/BellerCivicVeteransParade.mp4'
+    },
+    {
         id: 'breakfast',
         tabLabel: 'Dairy Breakfast',
         mp4: 'media/breakfast.mp4'
