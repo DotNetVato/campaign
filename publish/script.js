@@ -89,8 +89,13 @@ window.scrollTo({ top: 0, behavior: 'smooth' });
 const campaignVideos = [
 {
 id: 'messagefromdaevon',
-tabLabel: 'Message From Dae\'von',
+tabLabel: 'Message from Dae\'von',
 mp4: 'media/messagefromdaevon.mp4'
+},
+{
+id: 'daevon',
+tabLabel: 'Crossing Paths',
+mp4: 'media/daevon.mp4'
 },
 {
 id: 'earlyvotinggetoutandvote',
@@ -106,11 +111,6 @@ mp4: 'media/BellerCivicVeteransParade.mp4'
 id: 'breakfast',
 tabLabel: 'Dairy Breakfast',
 mp4: 'media/breakfast.mp4'
-},
-{
-id: 'daevon',
-tabLabel: 'Crossing Paths',
-mp4: 'media/daevon.mp4'
 },
 {
 id: 'campaign-launch',

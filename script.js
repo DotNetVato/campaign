@@ -104,8 +104,13 @@ function scrollToTop() {
 const campaignVideos = [
      {
         id: 'messagefromdaevon',
-        tabLabel: 'Message From Dae\'von',
+        tabLabel: 'Message from Dae\'von',
         mp4: 'media/messagefromdaevon.mp4'
+    },
+    {
+        id: 'daevon',
+        tabLabel: 'Crossing Paths',
+        mp4: 'media/daevon.mp4'
     },
     {
         id: 'earlyvotinggetoutandvote',
@@ -121,11 +126,6 @@ const campaignVideos = [
         id: 'breakfast',
         tabLabel: 'Dairy Breakfast',
         mp4: 'media/breakfast.mp4'
-    },
-    {
-        id: 'daevon',
-        tabLabel: 'Crossing Paths',
-        mp4: 'media/daevon.mp4'
     },
     {
         id: 'campaign-launch',
