@@ -98,6 +98,11 @@ tabLabel: 'Crossing Paths',
 mp4: 'media/daevon.mp4'
 },
 {
+id: 'icac',
+tabLabel: 'Crimes Against Children',
+mp4: 'media/ICAC.mp4'
+},
+{
 id: 'earlyvotinggetoutandvote',
 tabLabel: 'Early Voting',
 mp4: 'media/earlyvotinggetoutandvote.mp4'
