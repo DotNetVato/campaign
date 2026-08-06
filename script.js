@@ -102,7 +102,12 @@ function scrollToTop() {
 }
 
 const campaignVideos = [
-     {
+    {
+        id: 'beller-yellow-brick',
+        tabLabel: 'FBI National Academy',
+        mp4: 'media/BellerYellowBrick.mp4'
+    },
+    {
         id: 'messagefromdaevon',
         tabLabel: 'Message from Dae\'von',
         mp4: 'media/messagefromdaevon.mp4'
